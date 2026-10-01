@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#160812">
+<meta name="description" content="Our Little Universe — a little piece of my heart, made just for you.">
+<title>Our Little Universe ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Dancing+Script:wght@500&family=Great+Vibes&family=Montserrat:wght@500;600&family=Playfair+Display:ital,wght@0,700;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="locked">
+
+<div id="bg" aria-hidden="true">
+  <canvas id="starfield"></canvas>
+  <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="moon"></i>
+</div>
+<div id="hearts" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+<div id="blackout" aria-hidden="true"></div>
+
+<!-- ================= INTRO JOURNEY ================= -->
+<div id="intro" role="dialog" aria-label="Opening">
+  <div class="scene active" id="s-load">
+    <div class="bigheart" aria-hidden="true">❤️</div>
+    <p class="line big show">Preparing something special... ❤️</p>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="loadWrap"><i id="loadBar"></i></div>
+    <p class="small" id="loadPct">0%</p>
+    <p class="line" id="loadReady">Ready.<br>Come in. ❤️</p>
+  </div>
+
+  <div class="scene" id="s-ask">
+    <p class="line" id="ask1">Before you enter...</p>
+    <p class="line" id="ask2">I have a little question for you. ❤️</p>
+    <h2 class="line big" id="ask3">Are you ready to enter our little universe?</h2>
+    <div class="btns line" id="askBtns">
+      <button class="btn primary" id="yesBtn" type="button">YES, MY LOVE ❤️</button>
+      <button class="btn dodge" id="noBtn" type="button">NOT YET 🙈</button>
+    </div>
+    <p class="small" id="noMsg" aria-live="polite"></p>
+  </div>
+
+  <div class="scene" id="s-know">
+    <p class="line show">One little question...</p>
+    <h2 class="line big show" id="knowQ">Do you know how much you mean to me?</h2>
+    <div class="btns" id="knowBtns">
+      <button class="btn" type="button" data-k>A LITTLE ❤️</button>
+      <button class="btn" type="button" data-k>A LOT ❤️❤️</button>
+      <button class="btn" type="button" data-k>MORE THAN WORDS CAN SAY 💕</button>
+    </div>
+    <div id="knowOut">
+      <p class="line big" id="k1">Wrong answer...<br>You mean more than all of them. ❤️</p>
+      <p class="line" id="k2">Because somehow...<br>you became my favorite part of life.</p>
+      <button class="btn primary line" id="knowNext" type="button">Continue ❤️</button>
+    </div>
+  </div>
+
+  <div class="scene" id="s-ily">
+    <div class="bigheart" id="ilyHeart" aria-hidden="true">❤️</div>
+    <p class="line show">Now...<br>say the three words. ❤️</p>
+    <div class="words" id="words">
+      <button class="word" type="button" data-w>I</button>
+      <button class="word" type="button" data-w>LOVE</button>
+      <button class="word" type="button" data-w>YOU</button>
+    </div>
+    <div id="ilyOut">
+      <p class="line" id="i1">There it is...<br>The three words I'll never get tired of saying.</p>
+      <p class="line big" id="i2">I LOVE YOU. ❤️</p>
+      <button class="btn primary line" id="ilyNext" type="button">Continue ❤️</button>
+    </div>
+  </div>
+
+  <div class="scene" id="s-cine">
+    <p class="line" id="c1">Some people enter your life...</p>
+    <p class="line" id="c2">and somehow...</p>
+    <p class="line" id="c3">the world becomes a little softer.</p>
+    <p class="line big" id="c4">For me...<br>that person is YOU. ❤️</p>
+    <button class="btn primary line" id="enterBtn" type="button">Enter our universe ✨</button>
+  </div>
+</div>
+
+<button id="menuBtn" type="button" hidden aria-label="Open navigation menu" aria-expanded="false" aria-controls="menu">☰</button>
+<nav id="menu" aria-label="Sections" hidden>
+  <a href="#home">♡ Home</a>
+  <a href="#story">♡ Our Story</a>
+  <a href="#memories">♡ Memories</a>
+  <a href="#whyyou">♡ Why You</a>
+  <a href="#letter">♡ Letter</a>
+  <a href="#countdown">♡ Birthday</a>
+</nav>
+
+<button id="musicBtn" type="button" hidden aria-pressed="false" aria-label="Play music">
+  <span class="mico" aria-hidden="true">🎵</span>
+  <span class="mlabel" id="musicLabel">Tap to play our song</span>
+</button>
+<audio id="bgm" loop preload="metadata"></audio>
+
+<main id="main" hidden>
+
+  <section id="home">
+    <p class="small">a little piece of my heart</p>
+    <h1>OUR LITTLE<br>UNIVERSE</h1>
+    <p class="script" id="subtitle">A little piece of my heart, made just for you.</p>
+    <button class="heroheart" id="heroHeart" type="button" aria-label="A heart. Tap it five times for a secret.">❤️</button>
+    <div class="secretMsg glass rv s" id="secretMsg" hidden>You found my secret...<br>I love you more than this website could ever explain. ❤️</div>
+    <p class="hint">scroll slowly ↓</p>
+  </section>
+
+  <section id="story">
+    <h2 class="title rv">Our Story ❤️</h2>
+    <div class="tl" id="timeline"><div class="fill"></div></div>
+  </section>
+
+  <section id="memories">
+    <h2 class="title rv">Memories 📸</h2>
+    <p class="sub rv">Tap any memory to open it.</p>
+    <div class="wrap"><div class="gal" id="gallery"></div></div>
+
+    <h2 class="title rv extra-title">The memory wall</h2>
+    <div class="polas" id="polas"></div>
+
+    <h2 class="title rv extra-title">Every picture has a story</h2>
+    <div class="slideshow glass" id="show" aria-roledescription="carousel" aria-label="Photo slideshow">
+      <div class="sbg" id="sbg"></div>
+      <div class="sfg" id="sfg"></div>
+    </div>
+    <p class="scount" id="scount">01 / 12</p>
+    <p class="scap">Every picture has a story.<br>But my favorite story...<br>is us.</p>
+    <div class="btns">
+      <button class="btn" id="sPrev" type="button" aria-label="Previous photo">← Previous</button>
+      <button class="btn" id="sNext" type="button" aria-label="Next photo">Next →</button>
+    </div>
+  </section>
+
+  <section id="whyyou">
+    <h2 class="title rv">Why you?</h2>
+    <p class="sub rv">Tap each card to find out.</p>
+    <div class="why" id="why"></div>
+  </section>
+
+  <section id="quiz">
+    <h2 class="title rv">Let's see if you know how I feel about you... ❤️</h2>
+    <div class="quiz glass" id="quizBox"></div>
+  </section>
+
+  <section id="secret">
+    <p class="sub">There is one thing left...<br>Tap the heart.</p>
+    <button class="secret" id="secretHeart" type="button" aria-label="Tap the heart">♡</button>
+    <div class="secretMsg glass" id="secretText" hidden>If I could give you one thing...<br>I would give you the ability<br>to see yourself through my eyes.<br><br>Then you would finally understand...<br>how incredibly special you are to me. ❤️</div>
+  </section>
+
+  <section id="letter">
+    <h2 class="title rv">A Letter For You 💌</h2>
+    <div class="paper rv s" id="paper"><pre id="letterText"></pre></div>
+  </section>
+
+  <section id="ifcould">
+    <h2 class="title rv">If I could...</h2>
+    <div class="ifbox" id="ifbox" aria-live="polite"></div>
+    <button class="btn primary" id="ifNext" type="button">Next ❤️</button>
+  </section>
+
+  <section id="countdown">
+    <h2 class="title rv">The moment is almost here... 🎂</h2>
+    <div id="cdStage"><button class="btn primary" id="cdStart" type="button">Start the countdown ✨</button></div>
+  </section>
+
+  <div id="finale" hidden>
+    <section id="birthday">
+      <p class="script" id="bdSmall">✨ ✨ ✨</p>
+      <h2 id="bdTitle">HAPPY BIRTHDAY ❤️</h2>
+      <p class="script">To the person who makes my world a little more beautiful.</p>
+      <p class="tell">Today is your day.<br>But honestly...<br>I'm the lucky one<br>because I get to know you,<br>laugh with you,<br>make memories with you,<br>and love you.</p>
+      <button class="btn" id="moreFx" type="button">More magic ✨</button>
+    </section>
+
+    <section id="collageSec">
+      <h2 class="title">Us</h2>
+      <div class="collage" id="collage"><div class="us">US ❤️</div></div>
+    </section>
+
+    <section id="end">
+      <p class="final line" id="f1">And if this little website<br>could say only one thing...<br>it would be this:</p>
+      <p class="final big line" id="f2">I LOVE YOU. ❤️</p>
+      <p class="final line" id="f3">Happy Birthday, my love.<br><br>May your smile always be this beautiful.<br>May your dreams always find their way to you.<br>And may I get to be there<br>for many of the beautiful moments ahead.<br><br>❤️<br>Forever yours.</p>
+      <div class="footer">Made with all my heart ❤️<br>For you.<br>Always.</div>
+      <button class="btn" id="replay" type="button">Replay Our Story ↻</button>
+    </section>
+  </div>
+</main>
+
+<div id="modal" hidden role="dialog" aria-modal="true" aria-label="Memory viewer"></div>
+<script src="js/script.js"></script>
+</body>
+</html>
