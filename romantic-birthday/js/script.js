@@ -56,7 +56,7 @@ const CONFIG = {
     { src: "images/photo15.jpg", title: "Forever kind of love", caption: "And we're just getting started." }
   ],
 
-  music: "music/romantic.mp3",
+  music: "music/one.mpeg",
 
   timeline: [
     { when: "Chapter one",   title: "THE BEGINNING",  text: "The day everything started.",         photo: 0 },
